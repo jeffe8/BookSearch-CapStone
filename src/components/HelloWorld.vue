@@ -18,6 +18,7 @@
             <ul>
             <li>First Published:  {{book.volumeInfo.publishedDate}}</li>
             </ul>
+            
             </h3>
             
       </li>
