@@ -2,6 +2,8 @@
 
 > CapStone BookSearch WebApp
 
+// TODO: Write about the app.  Fill this README file with instructions on how to use the app and what it is meant for.
+
 ## Build Setup
 
 ``` bash

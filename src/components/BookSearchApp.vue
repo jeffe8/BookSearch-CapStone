@@ -1,16 +1,29 @@
 <template>
   <div class="begin">
     <form v-on:submit.prevent="getBooks">
-        <p>Enter Title/Subject/Author: <input type="text" v-model="query" placeholder="The Grapes of Wrath"> <button type="submit">Go</button></p>
+        
+          <label for="query">Enter Title/Subject/Author:</label>
+          <input type="text" v-model="query" placeholder="The Grapes of Wrath" id="query"><br>
+          <label for="pages">Results per Page</label>
+          <select v-model="selected" id="pages">
+            <option>10</option>
+            <option>20</option>
+            <option>40</option>
+          </select><br>
+          <button type="submit">Go</button>
     </form>
+
     <ul class="booklist" v-if="results && results.items.length>0">
       <li v-for="book in results.items">
         <h2>
           {{book.volumeInfo.title}}
         </h2>
+
           <ul>
+            
             <li v-for="author in book.volumeInfo.authors">{{author}}</li>
           </ul>
+
           <p><img v-bind:src="book.volumeInfo.imageLinks.thumbnail"></p>
           <p>{{book.volumeInfo.description}}</p> 
           <h3>
@@ -27,43 +40,45 @@
 </template>
 
 <script>
-import {API} from '@/common/api'
+import { API } from "@/common/api";
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: "BookSearchApp",
+  data() {
     return {
-      query: '',
-      results: undefined
-    }
+      query: "",
+      results: undefined,
+      selected: "10"
+    };
   },
   methods: {
-    getBooks () {
-      API.get('', {
+    getBooks() {
+      API.get("", {
         params: {
-            q: this.query
+          q: this.query,
+          maxResults: this.selected
         }
       })
-      .then(response => {
-        this.results = response.data
-      })
-      .catch(error => {
-        this.errors.push(error)
-      });
+        .then(response => {
+          this.results = response.data;
+        })
+        .catch(error => {
+          this.errors.push(error);
+        });
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
   list-style-type: none;
   padding: 0;
 }
-
 
 a {
   color: #42b983;
