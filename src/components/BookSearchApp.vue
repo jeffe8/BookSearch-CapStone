@@ -10,9 +10,10 @@
             <option>20</option>
             <option>40</option>
           </select><br>
-          <button type="submit">Go</button>
+          <button class="btn btn-primary" type="submit">Go</button>
     </form>
 
+    <div class="container-fluid results">
     <ul class="booklist" v-if="results && results.items.length>0">
       <li v-for="book in results.items">
         <h2>
@@ -36,6 +37,7 @@
             
       </li>
     </ul>
+    </div>
   </div>
 </template>
 
@@ -82,5 +84,8 @@ ul {
 
 a {
   color: #42b983;
+}
+.results {
+  margin: 0 100px;
 }
 </style>
