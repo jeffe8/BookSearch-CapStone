@@ -1,5 +1,7 @@
 <template>
   <div class="begin">
+  <favorite-books v-bind:favoriteBooks="favorites"></favorite-books>
+
     <form v-on:submit.prevent="getBooks">
         
           <label for="query">Enter Title/Subject/Author:</label>
@@ -14,11 +16,12 @@
     </form>
 
     <div class="container-fluid results">
+      <form v-on:save.prevent="saveBooks">
     <ul class="booklist" v-if="results && results.items.length>0">
       <li v-for="book in results.items">
-        <h2>
+          <h2>
           {{book.volumeInfo.title}}
-        </h2>
+          </h2>
 
           <ul>
             
@@ -32,19 +35,24 @@
             <ul>
             <li>First Published:  {{book.volumeInfo.publishedDate}}</li>
             </ul>
-            
-            </h3>
-            
+          </h3>
+          <button class="btn btn-primary" type="save">Save Book</button>
       </li>
     </ul>
+    </form>
     </div>
   </div>
 </template>
 
 <script>
 import { API } from "@/common/api";
+import FavoriteBooks from '@/components/FavoriteBooks';
+
 export default {
   name: "BookSearchApp",
+  components: {
+    'favorite-books': FavoriteBooks
+  },
   data() {
     return {
       query: "",
@@ -53,6 +61,11 @@ export default {
     };
   },
   methods: {
+    saveBook: function (book) {
+    this.favorites.push(book);
+    this.$ls.set('favoriteBooks', this.favorites);
+    },
+
     getBooks() {
       API.get("", {
         params: {
