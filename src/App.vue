@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="container-fluid" id="app">
     <img src="./assets/BookSearchApp.jpg">
     <router-view/>
   </div>
