@@ -15,7 +15,7 @@
           <button class="btn btn-primary" type="submit">Go</button>
     </form>
 
-    <div class="container-fluid results">
+    <div class=" results">
       <form v-on:save.prevent="saveBooks">
     <ul class="booklist" v-if="results && results.items.length>0">
       <li v-for="book in results.items">
