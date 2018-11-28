@@ -57,13 +57,14 @@ export default {
     return {
       query: "",
       results: undefined,
-      selected: "10"
+      selected: "10",
+      favorites: []
     };
   },
   methods: {
     saveBook: function (book) {
-    this.favorites.push(book);
-    this.$ls.set('favoriteBooks', this.favorites);
+    // this.favorites.push(book);
+    // this.$ls.set('favoriteBooks', this.favorites);
     },
 
     getBooks() {
