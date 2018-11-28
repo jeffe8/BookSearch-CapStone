@@ -2,7 +2,18 @@
 
 > CapStone BookSearch WebApp
 
-// TODO: Write about the app.  Fill this README file with instructions on how to use the app and what it is meant for.
+<h3>Book Search Web Application</h3>
+
+<p>Welcome to the BookSearch application developed by Jeff Salazar.  This WebApp is a comprehensive source for all published works available on the internet.  Utilizing the Google Books API, this application performs a streamlined Data Recall to produce the desired results for the user.</p>
+<p>Key Features include:</p>
+<ul>
+<li>Results Per Page</li>
+<li>Memory Cache for recent Searches</li>
+<li>Personalized Favorites list</li>
+<li>Publication Deatils (for small operation publishing)</li>
+</ul>
+
+<p>Templates for this WebApp have been developed using Vue.js and maintain a single-page format for ease of use and editing.</p>
 
 ## Build Setup
 
