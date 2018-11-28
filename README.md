@@ -1,6 +1,4 @@
-# capstone-booksearch
-
-> CapStone BookSearch WebApp
+# Capstone-BookSearch-WebApp
 
 <h3>Book Search Web Application</h3>
 
