@@ -63,15 +63,17 @@ export default {
   },
   created () {
     if (this.$ls.get('favoriteBooks')){
-      this.favorites = this.$ls.get('favoriteBooks')
+      this.favorites = this.$ls.get('favoriteBooks');
 
-    };
+    }
 
+  },
   methods: {
     saveBook: function (book) {
     this.favorites.push(book);
     this.$ls.set('favoriteBooks', this.favorites)
-    };
+   
+   },
 
     getBooks: function () {
       this. results = null;
