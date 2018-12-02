@@ -2,7 +2,6 @@
   <div id="app">
     <div class="row">
     <div class="col-sm">
-      One of three columns
     </div>
     <div class="col-sm">
       <img src="./assets/BookSearchApp.jpg">
