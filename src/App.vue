@@ -1,13 +1,39 @@
 <template>
   <div id="app">
-    <img src="./assets/BookSearchApp.jpg">
+    <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      <img src="./assets/BookSearchApp.jpg">
+    </div>
+    <div class="col-md">
+      <favorite-books v-bind:favoriteBooks="favorites"></favorite-books>
+    </div>
+  </div>
+    <div>
+    
     <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
+import FavoriteBooks from '@/components/FavoriteBooks'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'favorite-books': FavoriteBooks
+  },
+  data() {
+    return {
+      query: "",
+      results: undefined,
+      selected: "10",
+      favorites: []
+    };
+  }
 }
 </script>
 

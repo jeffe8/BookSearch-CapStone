@@ -31,8 +31,7 @@ export default {
   list-style-type: none;
   padding: 10px;
   background: #ccc;
-  width: 25%;
-  float: right;
+
 }
 .remove {
   font-size: 0.8rem;

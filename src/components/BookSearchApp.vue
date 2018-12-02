@@ -1,6 +1,6 @@
 <template>
   <div class="begin">
-  <favorite-books v-bind:favoriteBooks="favorites"></favorite-books>
+  
 
     <form v-on:submit.prevent="getBooks">
         
@@ -15,8 +15,8 @@
           <button class="btn btn-primary" type="submit">Go</button>
     </form>
 
-    <div class="container-fluid results">
-      <form v-on:save.prevent="saveBooks">
+    <div class="results">
+      <div>
     <ul class="booklist" v-if="results && results.items.length>0">
       <li v-for="book in results.items">
           <h2>
@@ -28,7 +28,7 @@
             <li v-for="author in book.volumeInfo.authors">{{author}}</li>
           </ul>
 
-          <p><img v-bind:src="book.volumeInfo.imageLinks.thumbnail"></p>
+          <p v-if="book.volumeInfo.imageLinks === null"><img v-bind:src="book.volumeInfo.imageLinks.thumbnail"></p>
           <p>{{book.volumeInfo.description}}</p> 
           <h3>
             Publisher:  {{book.volumeInfo.publisher}}
@@ -36,17 +36,18 @@
             <li>First Published:  {{book.volumeInfo.publishedDate}}</li>
             </ul>
           </h3>
-          <button class="btn btn-primary" type="save">Save Book</button>
+          <button v-on:click="saveBooks" class="btn btn-primary" type="save">Save Book</button>
       </li>
     </ul>
-    </form>
+    </div>
     </div>
   </div>
 </template>
 
 <script>
 import { API } from "@/common/api";
-import FavoriteBooks from '@/components/FavoriteBooks';
+import FavoriteBooks from '@/components/FavoriteBooks'
+
 
 export default {
   name: "BookSearchApp",
@@ -63,8 +64,8 @@ export default {
   },
   methods: {
     saveBook: function (book) {
-    // this.favorites.push(book);
-    // this.$ls.set('favoriteBooks', this.favorites);
+    this.favorites.push(book);
+    this.$ls.set('favoriteBooks', this.favorites);
     },
 
     getBooks() {
