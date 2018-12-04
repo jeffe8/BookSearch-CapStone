@@ -1,7 +1,6 @@
 <template>
   <div class="begin">
-  <favorite-cities v-bind:favoriteCities="favorites"></favorite-cities>    <h2>Book Search</h2>
-  <message-container v-bind:messages="messages"></message-container>
+  
     <form v-on:submit.prevent="getBooks">
         
           <label for="query">Enter Title/Subject/Author:</label>
@@ -14,15 +13,17 @@
           </select><br>
           <button class="btn btn-primary" type="submit">Go</button>
     </form>
-  <load-spinner v-if="showLoading"></load-spinner>
+  
 
   <div class="results">
       <div>
           <ul class="booklist" v-if="results && results.items.length>0">
               <li v-for="book in results.items">
-          <h2>{{book.volumeInfo.title}}</h2>
+                  <h2>{{book.volumeInfo.title}}</h2>
+                  <ul>
               <li v-for="author in book.volumeInfo.authors">{{author}}</li>
-                  <p v-if="book.volumeInfo.imagesLinks"><img v-bind:src="book.volumeInfo.imageLinks.thumbnail"></p>
+                  </ul>
+                  <p v-if="book.volumeInfo.imageLinks"><img v-bind:src="book.volumeInfo.imageLinks.thumbnail"></p>
                   <p>{{book.volumeInfo.description}}</p> 
           <h3>Publisher:  {{book.volumeInfo.publisher}}
             <ul>
@@ -41,33 +42,28 @@
 import { API } from "@/common/api";
 import BookSummary from '@/components/BookSummary';
 import FavoriteBooks from '@/components/FavoriteBooks';
-import MessageContainer from '@/components/MessageContainer';
-import CubeSpinner from '@/components/CubeSpinner'
 
 
 export default {
   name: "BookSearchApp",
   components: {
     'favorite-books': FavoriteBooks,
-    'load-spinner': CubeSpinner,
-    'message-container': MessageContainer
-  },
+    },
   data() {
     return {
       query: "",
       results: undefined,
       selected: "10",
-      messages: [],
       favorites: []
     };
   },
   created () {
     if (this.$ls.get('favoriteBooks')){
-      this.favorites = this.$ls.get('favoriteBooks');
+      this.favorites = this.$ls.get('favoriteBooks')
 
-    }
-
+    };
   },
+
   methods: {
     saveBook: function (book) {
     this.favorites.push(book);
