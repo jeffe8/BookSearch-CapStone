@@ -3,7 +3,8 @@
         <li><h2>Favorite Books</h2></li>
         <li v-if="favoriteBooks.length < 1">No favorites books to display.</li>
         <li v-for="book in favoriteBooks">
-          <router-link v-bind:to="{ name: 'BookSearchApp', params: { bookId: book.id } }">{{ book.name }}</router-link> <button v-on:click="removeBook(book)" class="remove">x</button>
+        <router-link v-bind:to="{ name: 'BookSearchApp', params: { bookId: book.id } }">{{ book.volumeInfo.title }}</router-link> <button v-on:click="removeBook(book)" class="remove">x</button>
+        
         </li>
     </ul>
 </template>
@@ -18,7 +19,7 @@ export default {
     favoriteBooks: Array
   },
   methods: {
-    removeBook: function (Book) {
+    removeBook: function (book) {
       this.favoriteBooks.splice(this.favoriteBooks.indexOf(book), 1);
       this.$ls.set('favoriteBooks', this.favoriteBooks);
     }

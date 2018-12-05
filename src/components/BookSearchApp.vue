@@ -1,40 +1,70 @@
 <template>
-  <div class="begin">
-  
-    <form v-on:submit.prevent="getBooks">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <section class="col-md-4 headliner">
         
-          <label for="query">Enter Title/Subject/Author:</label>
-          <input type="text" v-model="query" placeholder="The Grapes of Wrath" id="query"><br>
-          <label for="pages">Results per Page</label>
-          <select v-model="selected" id="pages">
-            <option>10</option>
-            <option>20</option>
-            <option>40</option>
-          </select><br>
-          <button class="btn btn-primary" type="submit">Go</button>
-    </form>
-  
-
-  <div class="results">
-      <div>
-          <ul class="booklist" v-if="results && results.items.length>0">
-              <li v-for="book in results.items">
-                  <h2>{{book.volumeInfo.title}}</h2>
-                  <ul>
-              <li v-for="author in book.volumeInfo.authors">{{author}}</li>
-                  </ul>
-                  <p v-if="book.volumeInfo.imageLinks"><img v-bind:src="book.volumeInfo.imageLinks.thumbnail"></p>
-                  <p>{{book.volumeInfo.description}}</p> 
-          <h3>Publisher:  {{book.volumeInfo.publisher}}
-            <ul>
-            <li>First Published:  {{book.volumeInfo.publishedDate}}</li>
-            </ul>
-          </h3>
-          <button class="btn btn-primary" v-on:click="saveBook(book)" type="save">Save Book to Favorites</button>
-              </li>
-          </ul>
+        <img src="../assets/BookSearchApp.jpg">
+      </section>
+      <section class="col-md-4">
+        <favorite-books v-bind:favoriteBooks="favorites"></favorite-books>
+      </section>
     </div>
-  </div>
+
+    <section>
+      <form v-on:submit.prevent="getBooks">
+
+        <label for="query">Enter Title/Subject/Author:</label>
+        <input
+          type="text"
+          v-model="query"
+          placeholder="The Grapes of Wrath"
+          id="query"
+        ><br>
+        <label for="pages">Results per Page</label>
+        <select
+          v-model="selected"
+          id="pages"
+        >
+          <option>10</option>
+          <option>20</option>
+          <option>40</option>
+        </select><br>
+        <button
+          class="btn btn-primary"
+          type="submit"
+        >Go</button>
+      </form>
+    </section>
+    <section>
+      <div class="results">
+        <div>
+          <ul
+            class="booklist"
+            v-if="results && results.items.length>0"
+          >
+            <li v-for="book in results.items">
+              <h2>{{book.volumeInfo.title}}</h2>
+              <ul>
+                <li v-for="author in book.volumeInfo.authors">{{author}}</li>
+              </ul>
+              <p v-if="book.volumeInfo.imageLinks"><img v-bind:src="book.volumeInfo.imageLinks.thumbnail"></p>
+              <p>{{book.volumeInfo.description}}</p>
+              <h3>Publisher: {{book.volumeInfo.publisher}}
+                <ul>
+                  <li>First Published: {{book.volumeInfo.publishedDate}}</li>
+                </ul>
+              </h3>
+              <button
+                class="btn btn-primary"
+                v-on:click="saveBook(book)"
+                type="save"
+              >Save Book to Favorites</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -113,6 +143,17 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+section.headliner img {
+  width: 100%;
+  height: 200px
+}
+
+@media only screen and (min-width: 600px) {
+  section.headliner img {
+  width: 100%;
+  height: 375px
+}
+}
 
 a {
   color: #42b983;
@@ -120,4 +161,5 @@ a {
 .results {
   margin: 0 100px;
 }
+
 </style>
